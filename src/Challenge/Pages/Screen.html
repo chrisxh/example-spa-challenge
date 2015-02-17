@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+
+
+<body>
+
+    <div class="row" ng-controller="ScreenController">
+        <div ng-show="isloading">Please wait!</div>
+
+        <div class="block">
+            <select style="width:100%" ng-model="screen" ng-change="loadfields()" ng-options="screen.Name + '-' + screen.Title for screen in screens" />
+        </div>
+        <div class="block">
+            <select ng-model="field" style="width:100%">
+
+                <option ng-repeat="field in fields" ng-selected="field" ng-class="{visible:field.Status==0,hidden:field.Status==1,disabled:field.Status==2}">{{field.Caption}}</option>
+
+            </select>
+        </div>
+
+        <!--<div class="block">
+
+            <select style="width:100%" ng-model="field" ng-class="red" ng-options="field.Caption for field in fields" />
+        </div>-->
+
+
+    </div>
+</body>
+</html>
