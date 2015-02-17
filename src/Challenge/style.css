@@ -1,0 +1,30 @@
+﻿.row {
+  width: 100%;
+  /*margin: 0 auto;*/
+  text-align:center;
+  
+   
+}
+.block {
+  width: 200px;
+  /*float: left;*/
+    display: inline-block;
+    zoom: 1;
+
+}
+.visible
+{
+   background: rgb(152,204,62);
+
+}
+
+.hidden
+{
+   background:rgb(210,210,210);
+
+}
+.disabled
+{
+     background: rgb(231,186,233);
+
+}
