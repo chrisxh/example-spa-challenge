@@ -16,6 +16,15 @@
     white-space: normal;
 }
 
+.visible{
+     background-color: rgb(152,204,62); 
+}
+.hide1{
+     background-color: rgb(210,210,000); 
+}
+.disabled{
+     background-color: rgb(231,186,233);
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

@@ -20,10 +20,23 @@
         {
             if ($scope.screens[i].id === screenId)
             {
-                for (idx = 0; idx < $scope.screens[i].fields.length;idx++)
+                for (idx = 0; idx < $scope.screens[i].fields.length; idx++) {
+                    if ($scope.screens[i].fields[idx].status === 0)
+                    {
+                        $scope.screens[i].fields[idx].bgcolor = 'visible';
+                    }
+                    else if ($scope.screens[i].fields[idx].status === 1)
+                    {
+                        $scope.screens[i].fields[idx].bgcolor = 'hide1';
+                    }
+                    else
+                    {
+
+                        $scope.screens[i].fields[idx].bgcolor = 'disabled';
+                    }
                     $scope.fields.push($scope.screens[i].fields[idx]);
-                $scope.showField = true;
-            }
+                }
+           }
         }
 
     }

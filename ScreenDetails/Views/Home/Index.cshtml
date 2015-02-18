@@ -22,7 +22,7 @@
                        <strong> List of feilds for selected screen </strong>
                         <table width="100%" cellpadding="5px">
                             <thead><tr style="font-weight:bold"><td> Id</td><td>Name</td> <td>Caption</td><td>Status</td> <td>Tooltip</td><td>LastUpdate</td></tr></thead>
-                            <tr ng-repeat="field in fields">
+                            <tr ng-repeat="field in fields" ng-class="'{{field.bgcolor}}'">
                                 <td>{{field.id}}</td>
                                 <td>{{field.name}}</td>
                                 <td>{{field.caption}}</td>
