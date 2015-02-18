@@ -24,15 +24,18 @@
                     if ($scope.screens[i].fields[idx].status === 0)
                     {
                         $scope.screens[i].fields[idx].bgcolor = 'visible';
+                        $scope.screens[i].fields[idx].status = 'Visible';
                     }
                     else if ($scope.screens[i].fields[idx].status === 1)
                     {
                         $scope.screens[i].fields[idx].bgcolor = 'hide1';
+                        $scope.screens[i].fields[idx].status = 'Hidden';
                     }
                     else
                     {
 
                         $scope.screens[i].fields[idx].bgcolor = 'disabled';
+                        $scope.screens[i].fields[idx].status = 'Disabled';
                     }
                     $scope.fields.push($scope.screens[i].fields[idx]);
                 }
