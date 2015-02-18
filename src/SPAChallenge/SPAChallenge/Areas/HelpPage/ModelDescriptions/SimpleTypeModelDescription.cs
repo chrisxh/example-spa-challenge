@@ -1,0 +1,6 @@
+namespace SPAChallenge.Areas.HelpPage.ModelDescriptions
+{
+    public class SimpleTypeModelDescription : ModelDescription
+    {
+    }
+}

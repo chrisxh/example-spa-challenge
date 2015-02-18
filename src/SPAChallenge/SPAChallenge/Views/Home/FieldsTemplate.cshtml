@@ -1,0 +1,9 @@
+﻿<ul class="list-group">
+    <li class="list-group-item" ng-class="{visibleField: Field.IsVisible, hiddenField: Field.IsHidden, disabledField: Field.IsDisabled}" ng-repeat="Field in Fields">
+        <div>Name: {{Field.Name}}</div>
+        <div>Caption: {{Field.Caption}}</div>
+        <div>Status: {{Field.Status}}</div>
+        <div>Tooltip: {{Field.Tooltip}}</div>
+        <div>LastUpdate: {{Field.LastUpdate}}</div>
+    </li>
+</ul>

@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div ng-controller="screenController" class="panel panel-default">
+            <div class="panel-heading">Screens</div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a ng-repeat="Screen in Screens" ng-href="#Screen/{{Screen.ID}}" ng-class="{active: Screen.IsActive}" ng-click="selectActive(Screen)" class="list-group-item">
+                        <div>Name: {{Screen.Name}}</div>
+                        <div>System: {{Screen.System}}</div>
+                        <div>Title: {{Screen.Title}}</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Fields</div>
+            <div class="panel-body fields" ng-view="">
+            </div>
+        </div>
+    </div>
+</div>
