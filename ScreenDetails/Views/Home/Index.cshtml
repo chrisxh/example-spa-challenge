@@ -1,0 +1,46 @@
+﻿@ViewBag.Title
+<div id="container" ng-app="ScreenDetailsApp">
+    <section id="content">
+        <div class="container">
+            <div ng-controller="ScreenDetailsCtrl" ng-init="getScreens()">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div ng-repeat="screen in screens">
+                            <p style="margin-bottom:30px">
+                                <button ng-click="getFields(screen.id)" ng-disabled="working">
+                                    Screen: {{screen.id}}
+                                </button>
+                                <br />
+                                Name:<strong> {{screen.name}} </strong><br />
+                                System:<strong>  {{screen.system}}</strong>
+                                <br />
+                                Title:<strong>  {{screen.title}}</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                       <strong> List of feilds for selected screen </strong>
+                        <table width="100%" cellpadding="5px">
+                            <thead><tr style="font-weight:bold"><td> Id</td><td>Name</td> <td>Caption</td><td>Status</td> <td>Tooltip</td><td>LastUpdate</td></tr></thead>
+                            <tr ng-repeat="field in fields">
+                                <td>{{field.id}}</td>
+                                <td>{{field.name}}</td>
+                                <td>{{field.caption}}</td>
+                                <td>{{field.status}}</td>
+                                <td>{{field.tooltip}}</td>
+                                <td>{{field.lastUpdate}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/app/controllers/screenDetails.js")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/app")
+}
