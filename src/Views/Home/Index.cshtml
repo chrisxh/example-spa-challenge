@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.layout-1.3.0.min.js"></script>
+    <script type="text/javascript">
+        var app = null;
+        $(document).ready(function () {
+            $('body').layout({
+                north__paneSelector: "#north"
+                , west__paneSelector: "#west"
+                , west__minSize: 100
+                , center__paneSelector: "#center"
+                , east__paneSelector: "#east"
+                , east__minSize: 400
+                , south__paneSelector: "#south"
+            });
+            $.when(
+                runAsync("GET", "/api/getScreens", '@(ViewBag.BaseUrl)')
+            ).done(function (data) {
+                var obj = JSON.parse(data);
+                $.each(obj, function (i, item) {
+                    var li = $("<li><a></a></li>");
+                    $("#screens").append(li);
+                    $("a", li).text(item.Name);
+                    $("a", li).attr("href", "javascript:getFields(" + item.Id + ")");
+                });
+            });
+        });
+        function getFields(screenId) {
+            $.when(
+            runAsync("GET", "/api/getFields/" + screenId, '@(ViewBag.BaseUrl)')
+            ).done(function (data) {
+                var obj = JSON.parse(data);
+                $("ul#fields").empty();
+                $.each(obj, function (i, item) {
+                    $('<li />', { id: i + "_" + screenId, html: item.Name }).appendTo('ul#fields')
+                    switch (item.Status.toLowerCase()) {
+                        case "visible":
+                            $("li#" + i + "_" + screenId).css("background-color", "rgb(152,204,62)");
+                            break;
+                        case "hidden":
+                            $("li#" + i + "_" + screenId).css("background-color", "rgb(210,210,210)");
+                            break;
+                        case "disabled":
+                            $("li#" + i + "_" + screenId).css("background-color", "rgb(231,186,233)");
+                            break;
+                    }
+                });
+            });
+        }
+        function runAsync(type, method, baseUrl) {
+            var ret = null;
+            $.when(
+                $.ajax({
+                    type: type,
+                    url: baseUrl + method,
+                    dataType: "json",
+                    async: false,
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    }
+                })
+                ).done(function (result) {
+                    ret = result;
+                });
+
+            return ret;
+        }
+    </script>
+</head>
+<body>
+    <div class="ui-layout-west" id="west">
+        <ul class="nav nav-list" id="screens">
+            <li>Screens</li>
+            <li class="divider"></li>
+        </ul>
+    </div>
+    <div class="ui-layout-center" id="center">
+        <div class="page-container row-fluid cont-row">
+            <div class="page-content no-min-height">
+                <div class="container-fluid promo-page">
+                    <div class="row">
+                        <div class="col-md-12 col">
+                            <div class="page-content">
+                                <ul class="nav" id="fields"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

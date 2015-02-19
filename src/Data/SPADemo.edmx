@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SPADemo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SPADemoStoreContainer">
+    <EntitySet Name="Screens" EntityType="SPADemo.Store.Screens" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Fields" EntityType="SPADemo.Store.Fields" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ScreenField" Association="SPADemo.Store.ScreenField">
+      <End Role="Screen" EntitySet="Screens" />
+      <End Role="Field" EntitySet="Fields" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Screens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="System" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fields">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Caption" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ToolTip" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+    <Property Name="ScreenId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ScreenField">
+    <End Role="Screen" Type="SPADemo.Store.Screens" Multiplicity="1" />
+    <End Role="Field" Type="SPADemo.Store.Fields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Screen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Field">
+        <PropertyRef Name="ScreenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SPADemo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SPADemoContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Screens" EntityType="SPADemo.Screen" />
+          <EntitySet Name="Fields" EntityType="SPADemo.Field" />
+          <AssociationSet Name="ScreenField" Association="SPADemo.ScreenField">
+            <End Role="Screen" EntitySet="Screens" />
+            <End Role="Field" EntitySet="Fields" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Screen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="System" Type="String" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="LastUpdate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Caption" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="ToolTip" Type="String" Nullable="false" />
+          <Property Name="LastUpdate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Screen" Relationship="SPADemo.ScreenField" FromRole="Field" ToRole="Screen" />
+          <Property Name="ScreenId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ScreenField">
+          <End Type="SPADemo.Screen" Role="Screen" Multiplicity="1" />
+          <End Type="SPADemo.Field" Role="Field" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Screen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Field">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SPADemoStoreContainer" CdmEntityContainer="SPADemoContainer">
+    <EntitySetMapping Name="Screens">
+      <EntityTypeMapping TypeName="IsTypeOf(SPADemo.Screen)">
+        <MappingFragment StoreEntitySet="Screens">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="System" ColumnName="System" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fields">
+      <EntityTypeMapping TypeName="IsTypeOf(SPADemo.Field)">
+        <MappingFragment StoreEntitySet="Fields">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Caption" ColumnName="Caption" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
